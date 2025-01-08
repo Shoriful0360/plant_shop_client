@@ -1,8 +1,15 @@
 import { Calendar } from 'react-date-range'
 import { FaUserAlt, FaDollarSign } from 'react-icons/fa'
 import { BsFillCartPlusFill, BsFillHouseDoorFill } from 'react-icons/bs'
+import useRole from '../../../hooks/useRole'
+import LoadingSpinner from '../../Shared/LoadingSpinner'
+import { Navigate } from 'react-router-dom'
 
 const AdminStatistics = () => {
+const [role,isLoading]=useRole()
+if(isLoading)return <LoadingSpinner></LoadingSpinner>
+if(role?.role==='Customer') return <Navigate to={'/dashboard/my-orders'}></Navigate>
+
   return (
     <div>
       <div className='mt-12'>
