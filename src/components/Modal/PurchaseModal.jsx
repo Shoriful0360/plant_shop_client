@@ -35,7 +35,7 @@ const PurchaseModal = ({ closeModal, isOpen,plant,refetch }) => {
     address:'',
     status:'pending'
   })
-
+//  quantity updata
 const handleQuantity=value=>{
 
   console.log(typeof value,typeof quantity)
@@ -55,12 +55,13 @@ const handleQuantity=value=>{
     return {...prev ,quantity:value,price:parseInt(price) * value}
   })
 }
-
+// purchase plant
 
 const handlePurchase=async()=>{
  try{
   await axiosSecure.post('/order',purchaseInfo)
-  await axiosSecure.patch(`/plant/quantity/${_id}`,{quantityUpdate:totalQuantity})
+  // decrease quantity
+  await axiosSecure.patch(`/plant/quantity/${_id}`,{quantityUpdate:totalQuantity,status:'decrease'})
   toast.success('order success')
   navigate('/dashboard/my-orders')
   refetch()

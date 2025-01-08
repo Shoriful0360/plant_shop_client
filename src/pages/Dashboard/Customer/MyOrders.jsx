@@ -7,7 +7,7 @@ import LoadingSpinner from '../../../components/Shared/LoadingSpinner'
 
 const MyOrders = () => {
   const {user}=useAuth()
-  const {data:orderData=[],isLoading}=useQuery({
+  const {data:orderData=[],isLoading,refetch}=useQuery({
     queryKey:['myOrder',user?.email],
     queryFn:async()=>{
       const result=await axiosSecure.get(`/order/${user?.email} `)
@@ -76,7 +76,7 @@ const MyOrders = () => {
                 </thead>
                 <tbody>
                   {
-                    orderData?.map(item=>   <CustomerOrderDataRow  key={item._id} item={item}/>)
+                    orderData?.map(item=>   <CustomerOrderDataRow refetch={refetch}  key={item._id} item={item}/>)
                   }
                
                 </tbody>

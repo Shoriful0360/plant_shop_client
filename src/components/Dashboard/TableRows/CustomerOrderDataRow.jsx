@@ -5,7 +5,8 @@ import axios from 'axios'
 import useAxiosSecure from '../../../hooks/useAxiosSecure'
 import toast from 'react-hot-toast'
 const CustomerOrderDataRow = ({item,refetch}) => {
-  const {Image,ImageName,category,price,quantity,status,_id}=item || {}
+  const {Image,ImageName,category,price,quantity,status,_id,
+    PlantId}=item || {}
   let [isOpen, setIsOpen] = useState(false)
   const closeModal = () => setIsOpen(false)
   const axiosSecure=useAxiosSecure()
@@ -13,7 +14,8 @@ const CustomerOrderDataRow = ({item,refetch}) => {
   const handleDelet=async()=>{
 try{
   await axiosSecure.delete(`/order/${_id}`)
-  await axiosSecure.patch(`/plant/quantity/${_id}`,quantity)
+  // decrease quantity
+  await axiosSecure.patch(`/plant/quantity/${PlantId}`,{quantityUpdate:quantity,status:'increase'})
   toast.success('Success! cancel your order')
   refetch()
 }catch (err){
