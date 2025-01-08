@@ -19,7 +19,8 @@ try{
   toast.success('Success! cancel your order')
   refetch()
 }catch (err){
-  console.log(err)
+  // console.log(err.response.data)
+  toast.error(err.response.data)
 }finally{
   closeModal()
 }
