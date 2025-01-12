@@ -1,8 +1,9 @@
 import { Helmet } from 'react-helmet-async'
 import useRole from '../../../hooks/useRole'
-import LoadingSpinner from '../../Shared/LoadingSpinner'
+
 import { Navigate } from 'react-router-dom'
 import AdminStatistics from '../../../components/Dashboard/Statistics/AdminStatistics'
+import LoadingSpinner from '../../../components/Shared/LoadingSpinner'
 const Statistics = () => {
   const [role,isLoading]=useRole()
 if(isLoading)return <LoadingSpinner></LoadingSpinner>

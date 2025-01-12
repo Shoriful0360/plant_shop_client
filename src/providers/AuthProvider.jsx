@@ -52,16 +52,20 @@ const AuthProvider = ({ children }) => {
   // onAuthStateChange
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async currentUser => {
-      console.log('CurrentUser-->', currentUser?.email)
+   
      
       if (currentUser?.email) {
         setUser(currentUser)
 
-   await axios.post(`http://localhost:9000/user/${currentUser?.email}`,{
-          name:currentUser?.displayName,
-          image:currentUser?.photoURL,
-          email:currentUser?.email
-        })
+        if(currentUser?.displayName && currentUser?.photoURL){
+          await axios.post(`http://localhost:9000/user/${currentUser?.email}`,{
+            name:currentUser?.displayName,
+            image:currentUser?.photoURL,
+            email:currentUser?.email
+          })
+        }
+
+ 
 
         // Get JWT token
         await axios.post(

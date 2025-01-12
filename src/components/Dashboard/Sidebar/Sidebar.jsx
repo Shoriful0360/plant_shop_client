@@ -18,7 +18,7 @@ const Sidebar = () => {
   const [isActive, setActive] = useState(false)
   // const { user,loading } = useAuth()
   const[role,isLoading]=useRole()
-  console.log(role)
+  
 
   if( isLoading) return <LoadingSpinner></LoadingSpinner>
 

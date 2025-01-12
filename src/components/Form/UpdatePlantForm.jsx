@@ -1,7 +1,40 @@
-const UpdatePlantForm = () => {
+import { useState } from "react"
+import useAxiosSecure from "../../hooks/useAxiosSecure"
+import { imageUpload } from "../../utilities/imageUpload"
+
+const UpdatePlantForm = ({plant,refetch,setIsEditModalOpen}) => {
+  const {imgUrl,name,category,price,quantity,_id,description}=plant || {}
+  const[imgUpload,setImgUpload]=useState({image:{name:'Upload Image',}})
+    // const[imageUrl,setImageUrl]=useState(imgUrl)
+  const axiosSecure=useAxiosSecure()
+  console.log(imgUpload.url)
+const handleUpdatePlant=async(e)=>{
+  e.preventDefault()
+  const form=e.target;
+  const name=form.name.value;
+  const category=form.category.value;
+  const description=form.description.value;
+  const price=form.price.value;
+  const quantity=form.quantity.value;
+  const image=form.image.files[0];
+
+  const formData={name,category,description,price,quantity,image}
+  console.log(formData)
+  return
+try{
+const {data}=await axiosSecure.put(`/plant/${_id}`)
+console.log(data)
+}catch (err){
+  console.log(err)
+}finally{
+  setIsEditModalOpen(false)
+  refetch()
+}
+
+}
   return (
     <div className='w-full flex flex-col justify-center items-center text-gray-800 rounded-xl bg-gray-50'>
-      <form>
+      <form onSubmit={handleUpdatePlant}>
         <div className='grid grid-cols-1 gap-10'>
           <div className='space-y-6'>
             {/* Name */}
@@ -14,7 +47,8 @@ const UpdatePlantForm = () => {
                 name='name'
                 id='name'
                 type='text'
-                placeholder='Plant Name'
+              defaultValue={name}
+        
                 required
               />
             </div>
@@ -24,6 +58,8 @@ const UpdatePlantForm = () => {
                 Category
               </label>
               <select
+             
+              defaultValue={category}
                 required
                 className='w-full px-4 py-3 border-lime-300 focus:outline-lime-500 rounded-md bg-white'
                 name='category'
@@ -41,6 +77,8 @@ const UpdatePlantForm = () => {
               </label>
 
               <textarea
+              defaultValue={description}
+            
                 id='description'
                 placeholder='Write plant description here...'
                 className='block rounded-md focus:lime-300 w-full h-32 px-4 py-3 text-gray-800  border border-lime-300 bg-white focus:outline-lime-500 '
@@ -57,6 +95,8 @@ const UpdatePlantForm = () => {
                   Price
                 </label>
                 <input
+                defaultValue={price}
+        
                   className='w-full px-4 py-3 text-gray-800 border border-lime-300 focus:outline-lime-500 rounded-md bg-white'
                   name='price'
                   id='price'
@@ -72,6 +112,8 @@ const UpdatePlantForm = () => {
                   Quantity
                 </label>
                 <input
+                defaultValue={quantity}
+   
                   className='w-full px-4 py-3 text-gray-800 border border-lime-300 focus:outline-lime-500 rounded-md bg-white'
                   name='quantity'
                   id='quantity'
@@ -84,9 +126,14 @@ const UpdatePlantForm = () => {
             {/* Image */}
             <div className=' p-4  w-full  m-auto rounded-lg flex-grow'>
               <div className='file_upload px-5 py-3 relative border-4 border-dotted border-gray-300 rounded-lg'>
-                <div className='flex flex-col w-max mx-auto text-center'>
+                <div className=' flex flex-col w-max mx-auto text-center'>
                   <label>
                     <input
+                     onChange={(e)=> 
+                      setImgUpload({
+                        image:e.target.files[0],
+                      url:URL.createObjectURL(e.target.files[0])
+                      })}
                       className='text-sm cursor-pointer w-36 hidden'
                       type='file'
                       name='image'
@@ -101,6 +148,11 @@ const UpdatePlantForm = () => {
                 </div>
               </div>
             </div>
+
+          {/* img */}
+          <div className="flex justify-center">
+            <img src={imgUpload?.url} className="w-36 h-20" alt="" />
+          </div>
 
             {/* Submit Button */}
             <button

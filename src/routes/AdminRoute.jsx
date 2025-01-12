@@ -9,7 +9,7 @@ const AdminRoute = ({children}) => {
     if(role?.role==='Admin') return children
     return (
         <div>
-            <Navigate to={'/login'}  replace='true'/>
+            <Navigate to={'/dashboard'}  replace='true'/>
         </div>
     );
 };

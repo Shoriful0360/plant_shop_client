@@ -10,8 +10,8 @@ const Login = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const from = location?.state?.from?.pathname || '/'
-  if (user) return <Navigate to={from} replace={true} />
   if (loading) return <LoadingSpinner />
+  if (user) return <Navigate to={from} replace={true} />
   // form submit handler
   const handleSubmit = async event => {
     event.preventDefault()
@@ -26,7 +26,7 @@ const Login = () => {
       navigate(from, { replace: true })
       toast.success('Login Successful')
     } catch (err) {
-      console.log(err)
+
       toast.error(err?.message)
     }
   }
@@ -39,7 +39,7 @@ const Login = () => {
       navigate(from, { replace: true })
       toast.success('Login Successful')
     } catch (err) {
-      console.log(err)
+
       toast.error(err?.message)
     }
   }

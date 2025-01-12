@@ -33,12 +33,11 @@ const PurchaseModal = ({ closeModal, isOpen,plant,refetch }) => {
     PlantId:_id,
     seller:seller?.email,
     address:'',
-    status:'pending'
+    status:'Pending'
   })
 //  quantity updata
 const handleQuantity=value=>{
 
-  console.log(typeof value,typeof quantity)
   if(parseInt(value)>parseInt(quantity)){
     setTotalQuantity(value)
 

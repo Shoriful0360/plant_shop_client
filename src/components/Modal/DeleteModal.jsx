@@ -76,6 +76,7 @@ DeleteModal.propTypes = {
   id: PropTypes.string,
   modalHandler: PropTypes.func,
   closeModal: PropTypes.func,
+  handleDelet: PropTypes.func,
   isOpen: PropTypes.bool,
 }
 

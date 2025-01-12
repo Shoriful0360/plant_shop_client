@@ -10,7 +10,7 @@ const Profile = () => {
   if(loading || isLoading) return <LoadingSpinner></LoadingSpinner>
 
 
-  console.log(role)
+
   return (
     <div className='flex justify-center items-center h-screen'>
       <Helmet>

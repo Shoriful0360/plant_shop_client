@@ -19,7 +19,7 @@ try{
   toast.success('Success! cancel your order')
   refetch()
 }catch (err){
-  // console.log(err.response.data)
+
   toast.error(err.response.data)
 }finally{
   closeModal()
@@ -60,11 +60,12 @@ try{
 
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
         <button
+        disabled={status==='Delivered'}
           onClick={() => setIsOpen(true)}
           className='relative disabled:cursor-not-allowed cursor-pointer inline-block px-3 py-1 font-semibold text-lime-900 leading-tight'
         >
           <span className='absolute cursor-pointer inset-0 bg-red-200 opacity-50 rounded-full'></span>
-          <span className='relative cursor-pointer'>Cancel</span>
+          <span  className='relative cursor-pointer'>Cancel</span>
         </button>
 
         <DeleteModal handleDelet={handleDelet} isOpen={isOpen} closeModal={closeModal} />

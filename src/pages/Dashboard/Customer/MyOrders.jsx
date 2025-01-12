@@ -15,7 +15,7 @@ const MyOrders = () => {
     },
     enabled:!!user?.email
   })
-  console.log(orderData)
+
   if(isLoading) return <LoadingSpinner></LoadingSpinner>
   return (
     <>
