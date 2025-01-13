@@ -13,7 +13,7 @@ const AddPlant = () => {
   const [loading,setLoading]=useState(false)
   const navigate=useNavigate()
   const axiosSecure=useAxiosSecure()
- console.log(imgUpload)
+
   const {user}=useAuth()
   const handleSubmitPlant=async(e)=>{
     e.preventDefault()

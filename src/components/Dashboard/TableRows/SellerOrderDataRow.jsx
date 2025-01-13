@@ -31,6 +31,7 @@ const handleDelet=async()=>{
       
       try{
         await axiosSecure.patch(`/seller_order/${_id}`,{status:newStatus})
+        toast.success('Update status')
         refetch()
       }catch (err){
         toast.error(err.response.data)

@@ -8,12 +8,15 @@ import { useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import LoadingSpinner from '../../components/Shared/LoadingSpinner'
+import useAuth from '../../hooks/useAuth'
+import useRole from '../../hooks/useRole'
 
 const PlantDetails = () => {
   let [isOpen, setIsOpen] = useState(false)
   const {id}=useParams()
-
-
+const {user}=useAuth()
+const[role]=useRole()
+console.log(role)
   const closeModal = () => {
     setIsOpen(false)
   }
@@ -102,7 +105,9 @@ if(isLoading) return LoadingSpinner
           <div className='flex justify-between'>
             <p className='font-bold text-3xl text-gray-500'>Price: {price}$</p>
             <div>
-              <Button onClick={()=>setIsOpen(true)}  label={quantity>0?'Purchase':'Out of Stock'} />
+              <Button
+              disabled={!user || user?.email ===seller?.email || role?.role !=='Customer' || quantity ===0}
+              onClick={()=>setIsOpen(true)}  label={quantity>0?'Purchase':'Out of Stock'} />
             </div>
           </div>
           <hr className='my-6' />
