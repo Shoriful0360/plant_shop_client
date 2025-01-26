@@ -4,10 +4,9 @@ import { imageUpload } from "../../utilities/imageUpload"
 
 const UpdatePlantForm = ({plant,refetch,setIsEditModalOpen}) => {
   const {imgUrl,name,category,price,quantity,_id,description}=plant || {}
-  const[imgUpload,setImgUpload]=useState({image:{name:'Upload Image',}})
-    // const[imageUrl,setImageUrl]=useState(imgUrl)
+    const[imageUrl,setImageUrl]=useState({url:imgUrl}) 
   const axiosSecure=useAxiosSecure()
-  console.log(imgUpload.url)
+  console.log(imageUrl)
 const handleUpdatePlant=async(e)=>{
   e.preventDefault()
   const form=e.target;
@@ -130,9 +129,9 @@ console.log(data)
                   <label>
                     <input
                      onChange={(e)=> 
-                      setImgUpload({
+                      setImageUrl({
                         image:e.target.files[0],
-                      url:URL.createObjectURL(e.target.files[0])
+                        url:URL.createObjectURL(e.target.files[0])
                       })}
                       className='text-sm cursor-pointer w-36 hidden'
                       type='file'
@@ -151,7 +150,7 @@ console.log(data)
 
           {/* img */}
           <div className="flex justify-center">
-            <img src={imgUpload?.url} className="w-36 h-20" alt="" />
+            <img src={imageUrl.url} className="w-36 h-20" alt="" />
           </div>
 
             {/* Submit Button */}

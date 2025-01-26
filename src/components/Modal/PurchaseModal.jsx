@@ -13,6 +13,10 @@ import Button from '../Shared/Button/Button'
 import toast from 'react-hot-toast'
 import useAxiosSecure from '../../hooks/useAxiosSecure'
 import { useNavigate } from 'react-router-dom'
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
+import CheckOutForm from '../Form/CheckOutForm'
+const stripePromise=loadStripe(import.meta.env.VITE_STRIPE_KEY)
 
 const PurchaseModal = ({ closeModal, isOpen,plant,refetch }) => {
   const axiosSecure=useAxiosSecure()
@@ -157,7 +161,19 @@ console.log(err)
                 />
               </div>
               <div className='mt-3'>
-               <Button  onClick={handlePurchase} label={`Payload $${totalPrice}`}></Button>
+              {/* check out form */}
+              <Elements stripe={stripePromise}>
+
+                {/* checkOutForm */}
+                <CheckOutForm
+                totalQuantity={totalQuantity}
+                purchaseInfo={purchaseInfo}
+                refetch={refetch}
+                closeModal={closeModal}
+                ></CheckOutForm>
+
+              </Elements>
+              
               </div>
 
               </DialogPanel>

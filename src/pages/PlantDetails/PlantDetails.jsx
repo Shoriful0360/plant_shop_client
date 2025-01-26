@@ -16,7 +16,7 @@ const PlantDetails = () => {
   const {id}=useParams()
 const {user}=useAuth()
 const[role]=useRole()
-console.log(role)
+
   const closeModal = () => {
     setIsOpen(false)
   }
